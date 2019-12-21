@@ -38,6 +38,30 @@ public class LanguageController {
         return "pageLangage";
     }
     
+    @RequestMapping(value="/pageLangage/remove", method = RequestMethod.GET)
+    public String deleteLanguage(ModelMap map, @RequestParam("id") String id) {
+    	languageService.removeLanguage(Long.valueOf(id));
+    	List<Language> listeLangage = languageService.recupererListeLangage();
+        map.addAttribute("listLanguage", listeLangage);
+        return "redirect:/pageLangage";
+    }
+    
+    @RequestMapping(value="/pageLangage/update", method = RequestMethod.POST)
+    public String updateLanguage(ModelMap map, @RequestParam("id") String id, @RequestParam("code") String code,  @RequestParam("name") String name) {
+    	languageService.updateLanguage(Long.valueOf(id), code, name);
+    	List<Language> listeLangage = languageService.recupererListeLangage();
+        map.addAttribute("listLanguage", listeLangage);
+        return "redirect:/pageLangage";
+    }
+    
+    @RequestMapping(value="/pageLangage/add", method = RequestMethod.POST)
+    public String addLanguage(ModelMap map, @RequestParam("id") String id, @RequestParam("code") String code,  @RequestParam("name") String name) {
+    	languageService.addLanguage(Long.valueOf(id), code, name);
+    	List<Language> listeLangage = languageService.recupererListeLangage();
+        map.addAttribute("listLanguage", listeLangage);
+        return "redirect:/pageLangage";
+    }
+    
     @RequestMapping(value="/autocomplete/language", method = RequestMethod.POST)
     public void recupererAutoCompleteList(ModelMap map, @RequestParam("term") String searchWorld) {
     	List<Language> listeLangages = languageService.recupererListeLangage();
@@ -67,6 +91,7 @@ public class LanguageController {
     	}
         map.addAttribute("results", language);    	
     }
+    
     
 }
 

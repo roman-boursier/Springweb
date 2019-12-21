@@ -2,6 +2,7 @@ package com.projet.dao;
 
 import java.util.List;
 
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,13 +24,35 @@ public class LanguageDAO implements ILanguageDAO {
         return languageList;
 	}
     
-    @Transactional(readOnly=true)
-   	public Language recupererSingleLangage() {
+    @Transactional(readOnly=false)
+   	public void removeLanguage(long id) {
    		Session session = sessionFactory.getCurrentSession();
-        Language language = (Language) session.createQuery("from Language where LANGUAGE_ID='2'").list();
-        return language;
+        session.createQuery("delete Language l where l.idLanguage = :id")
+        .setLong( "id", id )
+        .executeUpdate();
    	}
     
+    @Transactional(readOnly=false)
+   	public void updateLanguage(long id, String code, String name) {
+   		Session session = sessionFactory.getCurrentSession();
+        session.createQuery("update Language l set l.LanguageName = :name, l.LanguageCode = :code where l.idLanguage = :id")
+        .setLong("id", id )
+        .setParameter("code", code)
+        .setParameter("name", name)
+        .executeUpdate();
+   	}
+    
+    
+    @Transactional(readOnly=false)
+   	public void addLanguage(long id, String code, String name) {
+       Session session = sessionFactory.getCurrentSession();
+       Query query = session.createSQLQuery("INSERT INTO language (LANGUAGE_ID, LANGUAGE_CODE, LANGUAGE_NAME) VALUES (:id,:code,:name)");
+       query.setParameter("id", id);
+       query.setParameter("code", code);
+       query.setParameter("name", name);
+       query.executeUpdate();
+   	}
+     
 }
 
 

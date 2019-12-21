@@ -28,6 +28,21 @@ public class LanguageService implements ILanguageService {
 		List<Language> listLanguage = languageDao.recupererListeLangage();
 		return listLanguage;		
 	}
+	
+	@Transactional(readOnly=false)
+	public void updateLanguage(long id, String code, String name){
+		languageDao.updateLanguage(id, code, name);	
+	}
+	
+	@Transactional(readOnly=false)
+	public void removeLanguage(long id){
+		languageDao.removeLanguage(id);	
+	}
+	
+	@Transactional(readOnly=false)
+	public void addLanguage(long id, String code, String name){
+		languageDao.addLanguage(id, code, name);	
+	}
 
 	
 }
