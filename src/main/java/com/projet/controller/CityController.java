@@ -12,8 +12,10 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.projet.model.City;
+import com.projet.model.Language;
 import com.projet.service.ICityService;
 
 @Controller
@@ -36,6 +38,30 @@ public class CityController {
     	List<City> listeVille = cityService.recupererListeVille();
         map.addAttribute("listCity", listeVille);
         return "pageVille";
+    }
+    
+    @RequestMapping(value="/pageVille/remove", method = RequestMethod.GET)
+    public String deleteLanguage(ModelMap map, @RequestParam("id") String id) {
+    	cityService.removeCity(Long.valueOf(id));
+    	List<City> listeVille = cityService.recupererListeVille();
+        map.addAttribute("listCity", listeVille);
+        return "redirect:/pageVille";
+    }
+    
+    @RequestMapping(value="/pageVille/update", method = RequestMethod.POST)
+    public String updateCity(ModelMap map, @RequestParam("id") String id, @RequestParam("name") String name, @RequestParam("zipLabel") String zipLabel) {
+    	cityService.updateCity(Long.valueOf(id), name, zipLabel);
+    	List<City> listeVille = cityService.recupererListeVille();
+        map.addAttribute("listCity", listeVille);
+        return "redirect:/pageVille";
+    }
+    
+    @RequestMapping(value="/pageVille/add", method = RequestMethod.POST)
+    public String addCity(ModelMap map, @RequestParam("id") String id, @RequestParam("name") String name,  @RequestParam("zipLabel") String zipLabel) {
+    	cityService.addCity(Long.valueOf(id), name, zipLabel);
+    	List<City> listeVille = cityService.recupererListeVille();
+        map.addAttribute("listCity", listeVille);
+        return "redirect:/pageVille";
     }
 }
 

@@ -28,9 +28,21 @@ public class CityService implements ICityService {
 		List<City> listCity = cityDao.recupererListeVille();
 		return listCity;		
 	}
-
-
-
+	
+	@Transactional(readOnly=false)
+	public void updateCity(long id, String name, String zipLabel){
+		cityDao.updateCity(id, name, zipLabel);	
+	}
+	
+	@Transactional(readOnly=false)
+	public void removeCity(long id){
+		cityDao.removeCity(id);	
+	}
+	
+	@Transactional(readOnly=false)
+	public void addCity(long id, String name, String zipLabel){
+		cityDao.addCity(id, name, zipLabel);	
+	}
 	
 }
 

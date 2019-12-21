@@ -15,7 +15,10 @@ public class City
 	
 	
     @Column(name="CITY_NAME", nullable=false)
-    private String idCityName;
+    private String cityName;
+    
+    @Column(name="ZIP_LABEL", nullable=false)
+    private String cityZipLabel;
 
 
 	public int getId() {
@@ -28,13 +31,17 @@ public class City
 	}
 
 
-	public String getIdCityName() {
-		return idCityName;
+	public String getCityName() {
+		return cityName;
+	}
+
+	public String getCityZipLabel() {
+		return cityZipLabel;
 	}
 
 
 	public void setIdCityName(String idCityName) {
-		this.idCityName = idCityName;
+		this.cityName = idCityName;
 	}
     
   
