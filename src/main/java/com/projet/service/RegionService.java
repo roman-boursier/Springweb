@@ -28,8 +28,22 @@ public class RegionService implements IRegionService {
 		List<Region> listRegion = regionDao.recupererListeRegions();
 		return listRegion;		
 	}
-
 	
+	@Transactional(readOnly=false)
+	public void updateRegion(long id, String name){
+		regionDao.updateRegion(id, name);	
+	}
+	
+	@Transactional(readOnly=false)
+	public void removeRegion(long id){
+		regionDao.removeRegion(id);	
+	}
+	
+	@Transactional(readOnly=false)
+	public void addRegion(long id, String name){
+		regionDao.addRegion(id, name);	
+	}
+
 }
 
 

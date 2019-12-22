@@ -49,14 +49,14 @@
 	
 	  <div class="collapse navbar-collapse" id="navbarsExampleDefault">
 	    <ul class="navbar-nav mr-auto">
-	      <li class="nav-item active">
-	        <a class="nav-link" href="pagePays">Pays <span class="sr-only">(current)</span></a>
+	      <li class="nav-item">
+	        <a class="nav-link" href="pagePays">Pays<span class="sr-only">(current)</span></a>
 	      </li>
 	      <li class="nav-item">
 	        <a class="nav-link" href="pageVille">Villes <span class="sr-only"></span></a>
 	      </li>
 	      <li class="nav-item">
-	        <a class="nav-link" href="pageLangage">Languages <span class="sr-only"></span></a>
+	        <a class="nav-link" href="pageLangage">Langages <span class="sr-only"></span></a>
 	      </li>
 	      <li class="nav-item ">
 	        <a class="nav-link" href="pageRegions">Regions <span class="sr-only"></span></a>

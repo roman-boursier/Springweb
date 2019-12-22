@@ -1,8 +1,10 @@
 <div class="container">
 	<jsp:include page="header.jsp" />
-	<h3>Outil de recherche</h3>
 	
-	<div class="row">
+	<h1>Bienvenue !<h1>
+	<h3 class="text-muted">Application referentiel des adresses de Saint-Denis</h3>
+	
+	<div class="row mt-4">
     	<div class="col-sm">
 			<div class="form-group">
 				<label for="exampleFormControlSelect1"> Type :</label>
@@ -16,7 +18,7 @@
 			 </div>
   
 			 <div class="form-group ui-widget">
-				  <label for="libelle">Libellé</label>
+				  <label for="libelle">Libelle</label>
 				  <input class="form-control" id="libelle">
 			 </div>
 	 

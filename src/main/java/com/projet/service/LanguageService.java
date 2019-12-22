@@ -44,7 +44,6 @@ public class LanguageService implements ILanguageService {
 		languageDao.addLanguage(id, code, name);	
 	}
 
-	
 }
 
 
