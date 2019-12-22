@@ -1,11 +1,9 @@
 <div class="container">
 
 	<jsp:include page="./vues/header.jsp" />
-	<div class="row">
-    	<h1>Bienvenue !<h1>
-		<h3 class="text-muted">Application referentiel des adresses de Saint-Denis</h3>
-	</div>
-	
+   	<h1>Bienvenue !<h1>
+	<h3 class="text-muted">Application referentiel des adresses de Saint-Denis</h3>
+
 	<div class="row mt-4">
 	  <div class="col-sm-4">
 	    <div class="card">
