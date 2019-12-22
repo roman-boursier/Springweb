@@ -41,8 +41,8 @@ public class RegionService implements IRegionService {
 	}
 	
 	@Transactional(readOnly=false)
-	public void addRegion(long id, String name){
-		regionDao.addRegion(id, name);	
+	public void addRegion(String name){
+		regionDao.addRegion(name);	
 	}
 	
 	@Transactional(readOnly=true)

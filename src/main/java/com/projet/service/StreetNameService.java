@@ -40,8 +40,8 @@ public class StreetNameService implements IStreetNameService {
 	}
 	
 	@Transactional(readOnly=false)
-	public void addListeRue(long id, String name){
-		streetNameDao.addListeRue(id, name);	
+	public void addListeRue(String name){
+		streetNameDao.addListeRue(name);	
 	}
 	
 	@Transactional(readOnly=true)

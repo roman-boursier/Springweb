@@ -41,8 +41,8 @@ public class CityService implements ICityService {
 	}
 	
 	@Transactional(readOnly=false)
-	public void addCity(long id, String name, String zipLabel){
-		cityDao.addCity(id, name, zipLabel);	
+	public void addCity(String name, String zipLabel){
+		cityDao.addCity(name, zipLabel);	
 	}
 	
 	@Transactional(readOnly=true)

@@ -60,8 +60,8 @@ public class CityController {
     }
     
     @RequestMapping(value="/pageVille/add", method = RequestMethod.POST)
-    public String addCity(ModelMap map, @RequestParam("id") String id, @RequestParam("name") String name,  @RequestParam("zipLabel") String zipLabel) {
-    	cityService.addCity(Long.valueOf(id), name, zipLabel);
+    public String addCity(ModelMap map, @RequestParam("name") String name,  @RequestParam("zipLabel") String zipLabel) {
+    	cityService.addCity(name, zipLabel);
     	List<City> listeVille = cityService.recupererListeVille();
         map.addAttribute("listCity", listeVille);
         return "redirect:/pageVille";

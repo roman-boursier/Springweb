@@ -20,7 +20,7 @@ public class StreetNameDAO implements IStreetNameDAO {
     @Transactional(readOnly=true)
 	public List<Street_name> recupererListeRue() {
 		Session session = sessionFactory.getCurrentSession();
-        List<Street_name> Ruelist = session.createQuery("from Street_name").list();
+        List<Street_name> Ruelist = session.createQuery("from Street_name s order by s.id DESC").list();
         return Ruelist;
 	}
 	
@@ -43,10 +43,9 @@ public class StreetNameDAO implements IStreetNameDAO {
     
     
     @Transactional(readOnly=false)
-   	public void addListeRue(long id, String name) {
+   	public void addListeRue(String name) {
        Session session = sessionFactory.getCurrentSession();
-       Query query = session.createSQLQuery("INSERT INTO street_name (ID, STREET_NAME_LABEL) VALUES (:id, :name)");
-       query.setParameter("id", id);
+       Query query = session.createSQLQuery("INSERT INTO street_name (ID, STREET_NAME_LABEL) VALUES (0, :name)");
        query.setParameter("name", name);
        query.executeUpdate();
    	}

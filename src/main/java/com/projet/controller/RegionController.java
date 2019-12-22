@@ -62,8 +62,8 @@ public class RegionController {
     }
     
     @RequestMapping(value="/pageRegions/add", method = RequestMethod.POST)
-    public String addRegion(ModelMap map, @RequestParam("id") String id, @RequestParam("name") String name) {
-    	regionService.addRegion(Long.valueOf(id), name);
+    public String addRegion(ModelMap map, @RequestParam("name") String name) {
+    	regionService.addRegion(name);
     	List<Region> listeRegion = regionService.recupererListeRegions();
         map.addAttribute("listRegions", listeRegion);
         return "redirect:/pageRegions";

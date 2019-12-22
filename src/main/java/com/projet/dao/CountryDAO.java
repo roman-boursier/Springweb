@@ -21,7 +21,7 @@ public class CountryDAO implements ICountryDAO {
     @Transactional(readOnly=true)
 	public List<Country> recupererListePays() {
 		Session session = sessionFactory.getCurrentSession();
-        List<Country> countryList = session.createQuery("from Country").list();
+        List<Country> countryList = session.createQuery("from Country c order by c.idCountry DESC").list();
         return countryList;
 	}
     
@@ -44,10 +44,9 @@ public class CountryDAO implements ICountryDAO {
     
     
     @Transactional(readOnly=false)
-   	public void addCountry(long id, String code) {
+   	public void addCountry(String code) {
        Session session = sessionFactory.getCurrentSession();
-       Query query = session.createSQLQuery("INSERT INTO country (ID_COUNTRY, CODE_ISO, MANAGED) VALUES (:id,:code,0)");
-       query.setParameter("id", id);
+       Query query = session.createSQLQuery("INSERT INTO country (ID_COUNTRY, CODE_ISO, MANAGED) VALUES (0,:code,0)");
        query.setParameter("code", code);
        query.executeUpdate();
    	}

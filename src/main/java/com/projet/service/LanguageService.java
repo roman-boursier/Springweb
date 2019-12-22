@@ -46,8 +46,8 @@ public class LanguageService implements ILanguageService {
 	}
 	
 	@Transactional(readOnly=false)
-	public void addLanguage(long id, String code, String name){
-		languageDao.addLanguage(id, code, name);	
+	public void addLanguage(String code, String name){
+		languageDao.addLanguage(code, name);	
 	}
 	
 	@Transactional(readOnly=false)

@@ -60,8 +60,8 @@ public class CountryController {
     }
     
     @RequestMapping(value="/pagePays/add", method = RequestMethod.POST)
-    public String addLanguage(ModelMap map, @RequestParam("id") String id, @RequestParam("code") String code) {
-    	countryService.addCountry(Long.valueOf(id), code);
+    public String addLanguage(ModelMap map, @RequestParam("code") String code) {
+    	countryService.addCountry(code);
     	List<Country> listePays = countryService.recupererListePays();
         map.addAttribute("listCountry", listePays);
         return "redirect:/pagePays";

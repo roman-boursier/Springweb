@@ -9,9 +9,6 @@
 
    	<form method="POST" action="pageVille/add">
    		<div class="row mt-4 mb-4">
-   			<div class="col">
-				  <input class="form-control" type="text" name="id" placeholder="id">
-			 </div>
 			 <div class="col">
 				  <input class="form-control" type="text" name="zipLabel" placeholder="Label">
 			 </div>

@@ -20,7 +20,7 @@ public class LanguageDAO implements ILanguageDAO {
     @Transactional(readOnly=true)
 	public List<Language> recupererListeLangage() {
 		Session session = sessionFactory.getCurrentSession();
-        List<Language> languageList = session.createQuery("from Language").list();
+        List<Language> languageList = session.createQuery("from Language l order by l.idLanguage DESC").list();
         return languageList;
 	}
     
@@ -44,10 +44,9 @@ public class LanguageDAO implements ILanguageDAO {
     
     
     @Transactional(readOnly=false)
-   	public void addLanguage(long id, String code, String name) {
+   	public void addLanguage(String code, String name) {
        Session session = sessionFactory.getCurrentSession();
-       Query query = session.createSQLQuery("INSERT INTO language (LANGUAGE_ID, LANGUAGE_CODE, LANGUAGE_NAME) VALUES (:id,:code,:name)");
-       query.setParameter("id", id);
+       Query query = session.createSQLQuery("INSERT INTO language (LANGUAGE_ID, LANGUAGE_CODE, LANGUAGE_NAME) VALUES (0,:code,:name)");
        query.setParameter("code", code);
        query.setParameter("name", name);
        query.executeUpdate();

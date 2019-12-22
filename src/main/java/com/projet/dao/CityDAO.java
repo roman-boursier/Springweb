@@ -21,7 +21,7 @@ public class CityDAO implements ICityDAO {
     @Transactional(readOnly=true)
 	public List<City> recupererListeVille() {
 		Session session = sessionFactory.getCurrentSession();
-        List<City> cityList = session.createQuery("from City").setMaxResults(100).list();
+        List<City> cityList = session.createQuery("from City c order by c.id DESC").setMaxResults(100).list();
         return cityList;
 	}
     
@@ -45,10 +45,9 @@ public class CityDAO implements ICityDAO {
     
     
     @Transactional(readOnly=false)
-   	public void addCity(long id, String name, String zipLabel) {
+   	public void addCity(String name, String zipLabel) {
        Session session = sessionFactory.getCurrentSession();
-       Query query = session.createSQLQuery("INSERT INTO city (ID, CITY_NAME, ZIP_LABEL) VALUES (:id,:name,:zipLabel)");
-       query.setParameter("id", id);
+       Query query = session.createSQLQuery("INSERT INTO city (ID, CITY_NAME, ZIP_LABEL) VALUES (0,:name,:zipLabel)");
        query.setParameter("name", name);
        query.setParameter("zipLabel", zipLabel);
        query.executeUpdate();

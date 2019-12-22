@@ -20,7 +20,7 @@ public class RegionDAO implements IRegionDAO {
     @Transactional(readOnly=true)
 	public List<Region> recupererListeRegions() {
 		Session session = sessionFactory.getCurrentSession();
-        List<Region> regionList = session.createQuery("from Region").list();
+        List<Region> regionList = session.createQuery("from Region r order by r.idArea DESC").list();
         return regionList;
 	}
     
@@ -43,10 +43,9 @@ public class RegionDAO implements IRegionDAO {
     
     
     @Transactional(readOnly=false)
-   	public void addRegion(long id, String name) {
+   	public void addRegion(String name) {
        Session session = sessionFactory.getCurrentSession();
-       Query query = session.createSQLQuery("INSERT INTO area (ID_AREA, AREA_LABEL, ID_COUNTRY, LANGUAGE_ID) VALUES (:id, :name, 0, 0)");
-       query.setParameter("id", id);
+       Query query = session.createSQLQuery("INSERT INTO area (ID_AREA, AREA_LABEL, ID_COUNTRY, LANGUAGE_ID) VALUES (0, :name, 0, 0)");
        query.setParameter("name", name);
        query.executeUpdate();
    	}

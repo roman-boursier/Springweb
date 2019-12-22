@@ -57,8 +57,8 @@ public class LanguageController {
     }
     
     @RequestMapping(value="/pageLangage/add", method = RequestMethod.POST)
-    public String addLanguage(ModelMap map, @RequestParam("id") String id, @RequestParam("code") String code,  @RequestParam("name") String name) {
-    	languageService.addLanguage(Long.valueOf(id), code, name);
+    public String addLanguage(ModelMap map, @RequestParam("code") String code,  @RequestParam("name") String name) {
+    	languageService.addLanguage(code, name);
     	List<Language> listeLangage = languageService.recupererListeLangage();
         map.addAttribute("listLanguage", listeLangage);
         return "redirect:/pageLangage";

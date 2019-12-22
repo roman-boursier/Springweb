@@ -54,8 +54,8 @@ public class StreetNameController {
     }
     
     @RequestMapping(value="/pageRue/add", method = RequestMethod.POST)
-    public String addListeRue(ModelMap map, @RequestParam("id") String id, @RequestParam("name") String name) {
-    	streetNameService.addListeRue(Long.valueOf(id), name);
+    public String addListeRue(ModelMap map, @RequestParam("name") String name) {
+    	streetNameService.addListeRue(name);
     	List<Street_name> listeRue = streetNameService.recupererListeRue();
         map.addAttribute("listStreet", listeRue);
         return "redirect:/pageRue";

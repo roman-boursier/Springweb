@@ -41,8 +41,8 @@ public class CountryService implements ICountryService {
 	}
 	
 	@Transactional(readOnly=false)
-	public void addCountry(long id, String code){
-		countryDao.addCountry(id, code);	
+	public void addCountry(String code){
+		countryDao.addCountry(code);	
 	}
 	
 	@Transactional(readOnly=true)

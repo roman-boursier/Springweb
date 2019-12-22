@@ -10,7 +10,7 @@ public interface IRegionDAO {
 		public List<Region> searchRegion(String term);
 		public Region getRegion(int id);
 		public void removeRegion(long id);
-		public void addRegion(long id, String name);
+		public void addRegion(String name);
 		public void updateRegion(long id, String name);
 		
 }

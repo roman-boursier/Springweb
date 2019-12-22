@@ -9,13 +9,10 @@
 
    	<form method="POST" action="pageRegions/add">
    		<div class="row mt-4 mb-4">
-   			<div class="col">
-				  <input class="form-control" type="text" name="id" placeholder="id">
-			 </div>
-			  <div class="col">
+			  <div class="col-4">
 				  <input class="form-control" type="text" name="name" placeholder="Name">
 			 </div>
-			 <div class="col">
+			 <div class="col-3">
 			 	<input id="valider" class="form-control btn btn-primary" type="submit" value="Ajouter">
 			 </div>
   		</div>

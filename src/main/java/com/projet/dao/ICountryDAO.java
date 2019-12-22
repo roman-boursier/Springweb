@@ -9,6 +9,6 @@ public interface ICountryDAO {
 		public List<Country> searchCountry(String term);
 		public Country getCountry(int id);
 		public void removeCountry(long id);
-		public void addCountry(long id, String code);
+		public void addCountry(String code);
 		public void updateCountry(long id, String code);
 }
