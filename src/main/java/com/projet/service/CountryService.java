@@ -28,7 +28,21 @@ public class CountryService implements ICountryService {
 		List<Country> listCountry = countryDao.recupererListePays();
 		return listCountry;		
 	}
-
+	
+	@Transactional(readOnly=false)
+	public void updateCountry(long id, String code){
+		countryDao.updateCountry(id, code);	
+	}
+	
+	@Transactional(readOnly=false)
+	public void removeCountry(long id){
+		countryDao.removeCountry(id);	
+	}
+	
+	@Transactional(readOnly=false)
+	public void addCountry(long id, String code){
+		countryDao.addCountry(id, code);	
+	}
 	
 }
 

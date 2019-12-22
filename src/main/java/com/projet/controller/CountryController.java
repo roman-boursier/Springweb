@@ -12,8 +12,10 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.projet.model.Country;
+import com.projet.model.Language;
 import com.projet.service.ICountryService;
 
 @Controller
@@ -36,6 +38,30 @@ public class CountryController {
     	List<Country> listePays = countryService.recupererListePays();
         map.addAttribute("listCountry", listePays);
         return "pagePays";
+    }
+    
+    @RequestMapping(value="/pagePays/remove", method = RequestMethod.GET)
+    public String deleteLanguage(ModelMap map, @RequestParam("id") String id) {
+    	countryService.removeCountry(Long.valueOf(id));
+    	List<Country> listePays = countryService.recupererListePays();
+        map.addAttribute("listCountry", listePays);
+        return "redirect:/pagePays";
+    }
+    
+    @RequestMapping(value="/pagePays/update", method = RequestMethod.POST)
+    public String updateLanguage(ModelMap map, @RequestParam("id") String id, @RequestParam("code") String code) {
+    	countryService.updateCountry(Long.valueOf(id), code);
+    	List<Country> listePays = countryService.recupererListePays();
+        map.addAttribute("listCountry", listePays);
+        return "redirect:/pagePays";
+    }
+    
+    @RequestMapping(value="/pagePays/add", method = RequestMethod.POST)
+    public String addLanguage(ModelMap map, @RequestParam("id") String id, @RequestParam("code") String code) {
+    	countryService.addCountry(Long.valueOf(id), code);
+    	List<Country> listePays = countryService.recupererListePays();
+        map.addAttribute("listCountry", listePays);
+        return "redirect:/pagePays";
     }
 }
 

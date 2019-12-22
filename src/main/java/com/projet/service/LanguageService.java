@@ -43,7 +43,6 @@ public class LanguageService implements ILanguageService {
 	public void addLanguage(long id, String code, String name){
 		languageDao.addLanguage(id, code, name);	
 	}
-
 }
 
 
