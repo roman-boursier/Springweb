@@ -8,6 +8,7 @@ import org.hibernate.SessionFactory;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.projet.model.City;
+import com.projet.model.City;
 
 public class CityDAO implements ICityDAO {
 
@@ -52,6 +53,20 @@ public class CityDAO implements ICityDAO {
        query.setParameter("zipLabel", zipLabel);
        query.executeUpdate();
    	}
+    
+    @Transactional(readOnly=true)
+   	public List<City> searchCity(String term) {
+   		Session session = sessionFactory.getCurrentSession();
+           List<City> CityList = session.createQuery("from City as l where l.cityName like ?").setString(0, "%"+term+"%").setMaxResults(1000).list();
+           return CityList;
+   	}
+       
+   @Transactional(readOnly=true)
+  	public City getCity(int id) {
+  	  Session session = sessionFactory.getCurrentSession();
+      City City = (City) session.createQuery("from City as l where l.id = :id").setParameter("id", id).uniqueResult();
+      return City;
+  	}
     
 }
 

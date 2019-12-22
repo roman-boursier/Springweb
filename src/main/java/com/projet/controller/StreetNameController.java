@@ -9,7 +9,9 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.google.gson.Gson;
 import com.projet.model.Street_name;
 import com.projet.service.IStreetNameService;
 
@@ -57,6 +59,20 @@ public class StreetNameController {
     	List<Street_name> listeRue = streetNameService.recupererListeRue();
         map.addAttribute("listStreet", listeRue);
         return "redirect:/pageRue";
+    }
+    
+    @RequestMapping(value="/autocomplete/street", method = RequestMethod.POST)
+    public @ResponseBody String recupererAutoCompleteList(ModelMap map, @RequestParam("term") String searchWorld) {
+    	List<Street_name> listeListeRueFiltered = streetNameService.searchListeRue(searchWorld);
+    	String json = new Gson().toJson(listeListeRueFiltered);
+        return json;
+    }
+    
+    @RequestMapping(value="/autocomplete/streetSingle", method = RequestMethod.POST)
+    public @ResponseBody String recupererSingle(ModelMap map, @RequestParam("id") String searchId) {
+    	Street_name ListeRue = streetNameService.getListeRue(Integer.valueOf(searchId));
+    	String json = new Gson().toJson(ListeRue);
+        return json; 	
     }
 }
 

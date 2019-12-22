@@ -13,7 +13,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.google.gson.Gson;
+import com.projet.model.City;
 import com.projet.model.City;
 import com.projet.model.Language;
 import com.projet.service.ICityService;
@@ -62,6 +65,20 @@ public class CityController {
     	List<City> listeVille = cityService.recupererListeVille();
         map.addAttribute("listCity", listeVille);
         return "redirect:/pageVille";
+    }
+    
+    @RequestMapping(value="/autocomplete/city", method = RequestMethod.POST)
+    public @ResponseBody String recupererAutoCompleteList(ModelMap map, @RequestParam("term") String searchWorld) {
+    	List<City> listeCityFiltered = cityService.searchCity(searchWorld);
+    	String json = new Gson().toJson(listeCityFiltered);
+        return json;
+    }
+    
+    @RequestMapping(value="/autocomplete/citySingle", method = RequestMethod.POST)
+    public @ResponseBody String recupererSingle(ModelMap map, @RequestParam("id") String searchId) {
+    	City City = cityService.getCity(Integer.valueOf(searchId));
+    	String json = new Gson().toJson(City);
+        return json; 	
     }
 }
 

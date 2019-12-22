@@ -43,6 +43,18 @@ public class StreetNameService implements IStreetNameService {
 	public void addListeRue(long id, String name){
 		streetNameDao.addListeRue(id, name);	
 	}
+	
+	@Transactional(readOnly=true)
+	public List<Street_name> searchListeRue(String term){
+		List<Street_name> listListeRue = streetNameDao.searchListeRue(term);
+		return listListeRue;		
+	}
+	
+	@Transactional(readOnly=false)
+	public Street_name getListeRue(int id){
+		Street_name ListeRue = streetNameDao.getListeRue(id);
+		return ListeRue;
+	}
 
 }
 

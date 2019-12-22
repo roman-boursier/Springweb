@@ -29,6 +29,12 @@ public class LanguageService implements ILanguageService {
 		return listLanguage;		
 	}
 	
+	@Transactional(readOnly=true)
+	public List<Language> searchLangage(String term){
+		List<Language> listLanguage = languageDao.searchLangage(term);
+		return listLanguage;		
+	}
+	
 	@Transactional(readOnly=false)
 	public void updateLanguage(long id, String code, String name){
 		languageDao.updateLanguage(id, code, name);	
@@ -42,6 +48,12 @@ public class LanguageService implements ILanguageService {
 	@Transactional(readOnly=false)
 	public void addLanguage(long id, String code, String name){
 		languageDao.addLanguage(id, code, name);	
+	}
+	
+	@Transactional(readOnly=false)
+	public Language getLanguage(long id){
+		Language language = languageDao.getLangage(id);
+		return language;
 	}
 }
 

@@ -9,6 +9,7 @@
 			<div class="form-group">
 				<label for="exampleFormControlSelect1"> Type :</label>
 				 <select  class="form-control" id="Infotype">
+				 	<option value="country">----</option>
 				 	<option value="country">Country</option>
 				 	<option value="regions">Region</option>
 				 	<option value="city">City</option>
@@ -51,8 +52,28 @@
 	          	url:"/Springweb/autocomplete/" + info + "Single",
 	          	method:"post",
 	           	data:{id:_id},
-	           	success:function(data){
-	           		$("#resultDiv").html(data);
+	           	success:function(jsonResponse){
+	           		const datas = JSON.parse(jsonResponse);
+	           		console.log(datas);
+	           		let result = '';
+	           		switch(info) {
+	           			case 'language':
+	           				result = datas.idLanguage + "<hr>" +  datas.LanguageCode + "<hr>" + datas.LanguageName;
+	           			break;
+	           			case 'regions':
+	           				result = datas.idArea + "<hr>" +  datas.areaLabel;
+	           			break;
+	           			case 'country':
+	           				result = datas.idCountry + "<hr>" +  datas.codeIso;
+	           			break;
+	           			case 'city':
+	           				result = datas.id + "<hr>" +  datas.cityName + "<hr>" +  datas.cityZipLabel;
+	           			break;
+	           			case 'street':
+	           				result = datas.id + "<hr>" +  datas.street_name;
+	           			break;
+	           		}
+	           		$("#resultDiv").html(result);
 	           	},
 	       	});
 		});
@@ -76,19 +97,49 @@
 		          	url:"/Springweb/autocomplete/" + info,
 		          	method:"post",
 		           	data:{term:request.term},
-		           	success:function(data){
-		  				var ar = data.split(',');
-		  				var json = [];
-		  				for(i = 0; i<= ar.length; i++){
-		  					if(ar[i]){
-		  						let ar2 = ar[i].split('-');
-		  						json.push({
-		       					"label":ar2[1],
-		       					"value":ar2[1],
-		       					"id":ar2[0].replace(/\n|\r|(\n\r)/g,'')
-		      					});
-		  					}
-		  				}
+		           	success:function(jsonResponse){
+		           		const datas = JSON.parse(jsonResponse);
+		           		console.log(datas);
+		           		let json = [];
+		  				for(i=0; i<datas.length; i++){
+		  					switch(info) {
+			           			case 'language':
+			           				json.push({
+				       					"label":datas[i].LanguageName,
+				       					"value":datas[i].LanguageName,
+				       					"id":datas[i].idLanguage
+				      					});
+			           			break;
+			           			case 'regions':
+			           				json.push({
+				       					"label":datas[i].areaLabel,
+				       					"value":datas[i].areaLabel,
+				       					"id":datas[i].idArea
+				      					});
+			           			break;
+			           			case 'country':
+			           				json.push({
+				       					"label":datas[i].codeIso,
+				       					"value":datas[i].codeIso,
+				       					"id":datas[i].idCountry
+				      					});
+			           			break;
+			           			case 'city':
+			           				json.push({
+				       					"label":datas[i].cityName,
+				       					"value":datas[i].cityName,
+				       					"id":datas[i].id
+				      					});
+			           			break;
+			           			case 'street':
+			           				json.push({
+				       					"label":datas[i].street_name,
+				       					"value":datas[i].street_name,
+				       					"id":datas[i].id
+				      					});
+			           			break;
+		           			}	
+		           		}
 		              	response(json); 
 		           	}
 		       	});

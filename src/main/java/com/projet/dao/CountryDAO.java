@@ -8,6 +8,7 @@ import org.hibernate.SessionFactory;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.projet.model.Country;
+import com.projet.model.Country;
 
 public class CountryDAO implements ICountryDAO {
 
@@ -51,6 +52,19 @@ public class CountryDAO implements ICountryDAO {
        query.executeUpdate();
    	}
     
+    @Transactional(readOnly=true)
+	public List<Country> searchCountry(String term) {
+		Session session = sessionFactory.getCurrentSession();
+        List<Country> CountryList = session.createQuery("from Country as l where l.codeIso like ?").setString(0, "%"+term+"%").list();
+        return CountryList;
+	}
+    
+    @Transactional(readOnly=true)
+   	public Country getCountry(int id) {
+   	   Session session = sessionFactory.getCurrentSession();
+       Country Country = (Country) session.createQuery("from Country as l where l.idCountry = :id").setParameter("id", id).uniqueResult();
+       return Country;
+   	}
 }
 
 

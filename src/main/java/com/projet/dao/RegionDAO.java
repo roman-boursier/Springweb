@@ -51,6 +51,20 @@ public class RegionDAO implements IRegionDAO {
        query.executeUpdate();
    	}
     
+    @Transactional(readOnly=true)
+	public List<Region> searchRegion(String term) {
+		Session session = sessionFactory.getCurrentSession();
+        List<Region> RegionList = session.createQuery("from Region as l where l.areaLabel like ?").setString(0, "%"+term+"%").list();
+        return RegionList;
+	}
+    
+    @Transactional(readOnly=true)
+   	public Region getRegion(int id) {
+   	   Session session = sessionFactory.getCurrentSession();
+       Region Region = (Region) session.createQuery("from Region as l where l.idArea = :id").setParameter("id", id).uniqueResult();
+       return Region;
+   	}
+    
 }
 
 

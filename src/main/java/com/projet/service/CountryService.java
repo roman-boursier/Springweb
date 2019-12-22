@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.projet.dao.ICountryDAO;
 import com.projet.model.Country;
+import com.projet.model.Country;
 
 @Service
 public class CountryService implements ICountryService {
@@ -42,6 +43,18 @@ public class CountryService implements ICountryService {
 	@Transactional(readOnly=false)
 	public void addCountry(long id, String code){
 		countryDao.addCountry(id, code);	
+	}
+	
+	@Transactional(readOnly=true)
+	public List<Country> searchCountry(String term){
+		List<Country> listCountry = countryDao.searchCountry(term);
+		return listCountry;		
+	}
+	
+	@Transactional(readOnly=false)
+	public Country getCountry(int id){
+		Country Country = countryDao.getCountry(id);
+		return Country;
 	}
 	
 }

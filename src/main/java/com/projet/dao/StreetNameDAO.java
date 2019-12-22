@@ -51,6 +51,20 @@ public class StreetNameDAO implements IStreetNameDAO {
        query.executeUpdate();
    	}
     
+    @Transactional(readOnly=true)
+   	public List<Street_name> searchListeRue(String term) {
+   		Session session = sessionFactory.getCurrentSession();
+           List<Street_name> ListeRueList = session.createQuery("from Street_name as l where l.street_name like ?").setString(0, "%"+term+"%").list();
+           return ListeRueList;
+   	}
+       
+   @Transactional(readOnly=true)
+  	public Street_name getListeRue(int id) {
+  	  Session session = sessionFactory.getCurrentSession();
+  	  Street_name ListeRue = (Street_name) session.createQuery("from Street_name as l where l.id = :id").setParameter("id", id).uniqueResult();
+      return ListeRue;
+  	}
+    
 }
 
 

@@ -52,6 +52,20 @@ public class LanguageDAO implements ILanguageDAO {
        query.setParameter("name", name);
        query.executeUpdate();
    	}
+    
+    @Transactional(readOnly=true)
+	public List<Language> searchLangage(String term) {
+		Session session = sessionFactory.getCurrentSession();
+        List<Language> languageList = session.createQuery("from Language as l where l.LanguageName like ?").setString(0, "%"+term+"%").list();
+        return languageList;
+	}
+    
+    @Transactional(readOnly=true)
+	public Language getLangage(long id) {
+		Session session = sessionFactory.getCurrentSession();
+        Language language = (Language) session.createQuery("from Language as l where l.idLanguage = :id").setParameter("id", id).uniqueResult();
+        return language;
+	}
      
 }
 

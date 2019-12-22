@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.projet.dao.IRegionDAO;
 import com.projet.model.Region;
+import com.projet.model.Region;
 
 @Service
 public class RegionService implements IRegionService {
@@ -42,6 +43,18 @@ public class RegionService implements IRegionService {
 	@Transactional(readOnly=false)
 	public void addRegion(long id, String name){
 		regionDao.addRegion(id, name);	
+	}
+	
+	@Transactional(readOnly=true)
+	public List<Region> searchRegion(String term){
+		List<Region> listRegion = regionDao.searchRegion(term);
+		return listRegion;		
+	}
+	
+	@Transactional(readOnly=false)
+	public Region getRegion(int id){
+		Region Region = regionDao.getRegion(id);
+		return Region;
 	}
 
 }

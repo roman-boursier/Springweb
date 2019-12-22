@@ -9,7 +9,9 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.google.gson.Gson;
 import com.projet.model.Language;
 import com.projet.service.ILanguageService;
 
@@ -63,36 +65,19 @@ public class LanguageController {
     }
     
     @RequestMapping(value="/autocomplete/language", method = RequestMethod.POST)
-    public void recupererAutoCompleteList(ModelMap map, @RequestParam("term") String searchWorld) {
-    	List<Language> listeLangages = languageService.recupererListeLangage();
-    	List<String> listeLangageFiltered = new ArrayList();
-    	
-    	for(int i=0;i<listeLangages.size();i++) {
-    		if(listeLangages.get(i).getLanguageName().contains(searchWorld)){
-    			listeLangageFiltered.add(
-					String.valueOf(listeLangages.get(i).getIdLanguage()) 
-					+ "-" + listeLangages.get(i).getLanguageName()
-    			);
-    		}
-    	}
-        map.addAttribute("results", listeLangageFiltered);
+    public @ResponseBody String recupererAutoCompleteList(ModelMap map, @RequestParam("term") String searchWorld) {
+    	List<Language> listeLangageFiltered = languageService.searchLangage(searchWorld);
+    	String json = new Gson().toJson(listeLangageFiltered);
+        return json;
     }
     
     @RequestMapping(value="/autocomplete/languageSingle", method = RequestMethod.POST)
-    public void recupererSingle(ModelMap map, @RequestParam("id") String searchId) {
-    	List<Language> listeLangage = languageService.recupererListeLangage();
-    	List<String> language = new ArrayList();
-    	
-    	for(int i=0;i<listeLangage.size();i++) {
-    		if(String.valueOf(listeLangage.get(i).getIdLanguage()).contentEquals(searchId)){
-    			language.add(String.valueOf(listeLangage.get(i).getIdLanguage()));
-    			language.add(listeLangage.get(i).getLanguageName());
-    		}
-    	}
-        map.addAttribute("results", language);    	
+    public @ResponseBody String recupererSingle(ModelMap map, @RequestParam("id") String searchId) {
+    	Language Langage = languageService.getLanguage(Long.valueOf(searchId));
+    	String json = new Gson().toJson(Langage);
+        return json; 	
     }
-    
-    
+
 }
 
 

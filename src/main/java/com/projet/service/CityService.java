@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.projet.dao.ICityDAO;
 import com.projet.model.City;
+import com.projet.model.City;
 
 @Service
 public class CityService implements ICityService {
@@ -42,6 +43,18 @@ public class CityService implements ICityService {
 	@Transactional(readOnly=false)
 	public void addCity(long id, String name, String zipLabel){
 		cityDao.addCity(id, name, zipLabel);	
+	}
+	
+	@Transactional(readOnly=true)
+	public List<City> searchCity(String term){
+		List<City> listCity = cityDao.searchCity(term);
+		return listCity;		
+	}
+	
+	@Transactional(readOnly=false)
+	public City getCity(int id){
+		City City = cityDao.getCity(id);
+		return City;
 	}
 	
 }

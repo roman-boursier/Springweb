@@ -13,9 +13,12 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.google.gson.Gson;
 import com.projet.model.Country;
 import com.projet.model.Language;
+import com.projet.model.Country;
 import com.projet.service.ICountryService;
 
 @Controller
@@ -62,6 +65,20 @@ public class CountryController {
     	List<Country> listePays = countryService.recupererListePays();
         map.addAttribute("listCountry", listePays);
         return "redirect:/pagePays";
+    }
+    
+    @RequestMapping(value="/autocomplete/country", method = RequestMethod.POST)
+    public @ResponseBody String recupererAutoCompleteList(ModelMap map, @RequestParam("term") String searchWorld) {
+    	List<Country> listeCountryFiltered = countryService.searchCountry(searchWorld);
+    	String json = new Gson().toJson(listeCountryFiltered);
+        return json;
+    }
+    
+    @RequestMapping(value="/autocomplete/countrySingle", method = RequestMethod.POST)
+    public @ResponseBody String recupererSingle(ModelMap map, @RequestParam("id") String searchId) {
+    	Country Country = countryService.getCountry(Integer.valueOf(searchId));
+    	String json = new Gson().toJson(Country);
+        return json; 	
     }
 }
 
