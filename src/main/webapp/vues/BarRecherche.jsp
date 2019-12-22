@@ -1,8 +1,7 @@
 <div class="container">
 	<jsp:include page="header.jsp" />
 	
-	<h1>Bienvenue !<h1>
-	<h3 class="text-muted">Application referentiel des adresses de Saint-Denis</h3>
+	<h1>Rechercher</h1>
 	
 	<div class="row mt-4">
     	<div class="col-sm">
