@@ -10,21 +10,21 @@ import javax.persistence.Table;
 public class Street_name 
 {
 	@Id
-	@Column(name="ID_STREET_NAME")
-	int idCity;
+	@Column(name="ID")
+	int id;
 	
 	
     @Column(name="STREET_NAME_LABEL", nullable=false)
     private String street_name;
 
 
-	public int getIdCity() {
-		return idCity;
+	public int getId() {
+		return id;
 	}
 
 
-	public void setIdCity(int idCity) {
-		this.idCity = idCity;
+	public void setId(int idCity) {
+		this.id = idCity;
 	}
 
 

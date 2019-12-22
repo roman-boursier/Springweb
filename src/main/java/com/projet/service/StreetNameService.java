@@ -28,8 +28,22 @@ public class StreetNameService implements IStreetNameService {
 		List<Street_name> listStreet = streetNameDao.recupererListeRue();
 		return listStreet;		
 	}
-
 	
+	@Transactional(readOnly=false)
+	public void updateListeRue(long id, String name){
+		streetNameDao.updateListeRue(id, name);	
+	}
+	
+	@Transactional(readOnly=false)
+	public void removeListeRue(long id){
+		streetNameDao.removeListeRue(id);	
+	}
+	
+	@Transactional(readOnly=false)
+	public void addListeRue(long id, String name){
+		streetNameDao.addListeRue(id, name);	
+	}
+
 }
 
 
