@@ -13,7 +13,7 @@
 				  <input class="form-control" type="text" name="id" placeholder="id">
 			 </div>
 			 <div class="col">
-				  <input class="form-control" type="text" name="code" placeholder="Code">
+				  <input class="form-control" type="text" name="code" maxlength="3" placeholder="Code">
 			 </div>
 			 <div class="col">
 			 	<input id="valider" class="form-control btn btn-primary" type="submit" value="Ajouter">
@@ -58,7 +58,7 @@
 				  	<form method="POST" action="pagePays/update">
 					  	<div class="form-group">
 					  		<label for="code">Code</label>
-					  		 <input class="form-control" type="text" name="code">
+					  		 <input class="form-control" type="text" maxlength="3" name="code">
 					  	</div>
 					   	<input type="hidden" name="id">
 					   	

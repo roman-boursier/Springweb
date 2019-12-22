@@ -13,7 +13,7 @@
 				  <input class="form-control" type="text" name="id" placeholder="id">
 			 </div>
 			 <div class="col">
-				  <input class="form-control" type="text" name="code" placeholder="Code">
+				  <input class="form-control" type="text" name="code" maxlength="3" placeholder="Code">
 			 </div>
 			  <div class="col">
 				  <input class="form-control" type="text" name="name" placeholder="Name">
@@ -63,7 +63,7 @@
 				  	<form method="POST" action="pageLangage/update">
 					  	<div class="form-group">
 					  		<label for="code">Code</label>
-					  		 <input class="form-control" type="text" name="code">
+					  		 <input class="form-control" type="text" maxlength="3" name="code">
 					  	</div>
 					  	<div class="form-group">
 					  		<label for="name">Name</label>
